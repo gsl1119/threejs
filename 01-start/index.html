@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>threejs</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.157.0/three.min.js"
+      integrity="sha512-nogdM20cZX4FjsqU5H5ecK3vw8LjYN1AcUUWi7asLUVP3eJK5wldywvqFMW8CLd5/xoiJaIL3eXG82SlOWZkTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      console.log(window.THREE);
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById("canvas");
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+
+        // threejs codes
+        // 创建3D场景对象
+        const scene = new THREE.Scene();
+        // 创建立方体的几何体
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        // 创建立方体的基础材质
+        const material = new THREE.MeshBasicMaterial({
+          color: "blue",
+        });
+        // 创建3D物体对象
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+        // 创建相机对象
+        const camera = new THREE.PerspectiveCamera(75, width / height);
+        // 设置相机位置
+        camera.position.set(2, 2, 2); // x:2 y:2 z:2
+        // 设置相机朝向
+        camera.lookAt(scene.position);
+        // 将相机放到场景中
+        scene.add(camera);
+        // 创建渲染器
+        const renderer = new THREE.WebGLRenderer({
+          canvas,
+        });
+        // 设置渲染器大小
+        renderer.setSize(width, height);
+        // 执行渲染
+        renderer.render(scene, camera);
+      });
+    </script>
+  </body>
+</html>
